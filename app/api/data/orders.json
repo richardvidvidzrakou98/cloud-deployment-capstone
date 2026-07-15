@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "orderNumber": "AGR1784062772859",
+    "items": [
+      {
+        "productId": 1,
+        "product": {
+          "id": 1,
+          "name": "Fresh Cassava",
+          "description": "Freshly harvested cassava from the Volta region — earthy, starchy, perfect for fufu, gari and banku.",
+          "price": 15,
+          "category": "Root Vegetables",
+          "image": "/src/assets/prod-cassava.jpg",
+          "unit": "kg",
+          "stock": 240,
+          "region": "Volta",
+          "harvestDate": "2026-06-28",
+          "organic": true,
+          "rating": 4.7,
+          "reviews": 234,
+          "featured": true,
+          "tags": [
+            "organic",
+            "fresh",
+            "local"
+          ],
+          "farmer": {
+            "name": "Kwame Mensah",
+            "region": "Volta",
+            "farmSize": "5 acres",
+            "verified": true,
+            "rating": 4.8
+          }
+        },
+        "quantity": 4
+      }
+    ],
+    "deliveryInfo": {
+      "name": "Richard Vidzrakou",
+      "email": "richardvidzrakou98@gmail.com",
+      "phone": "+233540381003",
+      "address": "TESHIE TUIBLEOO ALOWAY",
+      "region": "Greater Accra",
+      "notes": ""
+    },
+    "total": 88,
+    "deliveryCost": 28,
+    "status": "pending",
+    "createdAt": "2026-07-14T20:59:32.859Z",
+    "updatedAt": "2026-07-14T20:59:32.859Z"
+  }
+]
