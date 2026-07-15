@@ -23,7 +23,7 @@ module.exports = {
       env: {
         NODE_ENV: "production",
         PORT: 3000,
-        VITE_API_URL: "http://localhost:4000",
+        // VITE_API_URL is baked into the build at build-time, not runtime
       },
       instances: 1,
       autorestart: true,
