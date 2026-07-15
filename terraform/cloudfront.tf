@@ -1,1 +1,0 @@
-# CloudFront distribution configuration

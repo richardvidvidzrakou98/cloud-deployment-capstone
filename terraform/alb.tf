@@ -1,1 +1,0 @@
-# Application Load Balancer configuration

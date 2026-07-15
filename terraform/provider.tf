@@ -1,1 +1,0 @@
-# AWS Provider configuration
