@@ -50,7 +50,7 @@ jobs:
         run: |
           cd app
           mkdir -p deploy
-          cp -r .output api package.json package-lock.json ecosystem.config.js deploy/
+          cp -r .output api package.json package-lock.json ecosystem.config.cjs deploy/
           cd deploy
           tar -czf ../agrolink-app.tar.gz .
           cd ..
@@ -95,7 +95,7 @@ jobs:
 
             # Restart PM2 processes
             pm2 delete all || true
-            pm2 start ecosystem.config.js
+            pm2 start ecosystem.config.cjs
             pm2 save
 
             # Cleanup
@@ -123,7 +123,7 @@ jobs:
 
             # Restart PM2 processes
             pm2 delete all || true
-            pm2 start ecosystem.config.js
+            pm2 start ecosystem.config.cjs
             pm2 save
 
             # Cleanup
