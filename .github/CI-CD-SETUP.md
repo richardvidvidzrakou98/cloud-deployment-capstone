@@ -145,11 +145,18 @@ Before your first deployment, **SSH into EACH EC2 instance** and run:
 
 ```bash
 # Connect to EC2
-ssh -i your-key.pem ubuntu@<EC2_PUBLIC_IP>
+ssh -i your-key.pem ec2-user@<EC2_PUBLIC_IP>
 
-# Update system and install Node.js
-sudo apt update
-sudo apt install -y nodejs npm
+# Update system
+sudo yum update -y
+
+# Install Node.js 22 (required by TanStack Start)
+curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash -
+sudo yum install -y nodejs
+
+# Verify installation (must be 22.x or higher)
+node --version
+npm --version
 
 # Install PM2 globally
 sudo npm install -g pm2
@@ -326,7 +333,7 @@ npm run build
 
 # 2. Check Node.js version
 node --version
-# Should be 18.x or higher
+# Should be 22.x or higher (TanStack Start requirement)
 
 # 3. Verify all dependencies in package.json
 npm install
