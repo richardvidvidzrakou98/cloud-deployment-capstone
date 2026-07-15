@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Greater Accra",
+    "basePrice": 20,
+    "pricePerKg": 2,
+    "estimatedDays": "1-2 days"
+  },
+  { "id": 2, "name": "Ashanti", "basePrice": 30, "pricePerKg": 2.5, "estimatedDays": "2-3 days" },
+  { "id": 3, "name": "Western", "basePrice": 35, "pricePerKg": 2.5, "estimatedDays": "2-3 days" },
+  { "id": 4, "name": "Central", "basePrice": 25, "pricePerKg": 2, "estimatedDays": "2 days" },
+  { "id": 5, "name": "Eastern", "basePrice": 25, "pricePerKg": 2, "estimatedDays": "2 days" },
+  { "id": 6, "name": "Volta", "basePrice": 30, "pricePerKg": 2.5, "estimatedDays": "2-3 days" },
+  { "id": 7, "name": "Northern", "basePrice": 50, "pricePerKg": 3, "estimatedDays": "3-4 days" },
+  {
+    "id": 8,
+    "name": "Upper East",
+    "basePrice": 55,
+    "pricePerKg": 3.5,
+    "estimatedDays": "3-5 days"
+  },
+  {
+    "id": 9,
+    "name": "Upper West",
+    "basePrice": 55,
+    "pricePerKg": 3.5,
+    "estimatedDays": "3-5 days"
+  },
+  { "id": 10, "name": "Bono", "basePrice": 40, "pricePerKg": 3, "estimatedDays": "3 days" },
+  { "id": 11, "name": "Bono East", "basePrice": 42, "pricePerKg": 3, "estimatedDays": "3 days" },
+  { "id": 12, "name": "Ahafo", "basePrice": 40, "pricePerKg": 3, "estimatedDays": "3 days" },
+  { "id": 13, "name": "Oti", "basePrice": 45, "pricePerKg": 3, "estimatedDays": "3-4 days" },
+  { "id": 14, "name": "Savannah", "basePrice": 55, "pricePerKg": 3.5, "estimatedDays": "3-5 days" },
+  {
+    "id": 15,
+    "name": "North East",
+    "basePrice": 55,
+    "pricePerKg": 3.5,
+    "estimatedDays": "3-5 days"
+  },
+  { "id": 16, "name": "Western North", "basePrice": 40, "pricePerKg": 3, "estimatedDays": "3 days" }
+]

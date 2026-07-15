@@ -1,360 +1,186 @@
-# End-to-End Cloud Solution Deployment
+# AgroLink Ghana - Cloud Deployment Capstone
 
-![AWS](https://img.shields.io/badge/AWS-Cloud%20Computing-FF9900?logo=amazonaws&logoColor=white)
-![Terraform](https://img.shields.io/badge/Terraform-Infrastructure%20as%20Code-7B42BC?logo=terraform&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?logo=githubactions&logoColor=white)
-![License](https://img.shields.io/badge/License-Educational-blue)
-
-The **End-to-End Cloud Solution Deployment** project demonstrates the design, deployment, and automation of a secure, scalable, and highly available web application on **Amazon Web Services (AWS)**. It showcases cloud architecture, Infrastructure as Code (IaC), security best practices, and DevOps workflows using Terraform and GitHub.
-
----
-
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Project Objectives](#project-objectives)
-- [Key Features](#key-features)
-- [Technologies Used](#technologies-used)
-- [Solution Architecture](#solution-architecture)
-- [AWS Services Used](#aws-services-used)
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Setup Instructions](#setup-instructions)
-- [Deployment Steps](#deployment-steps)
-- [Security Features](#security-features)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Screenshots](#screenshots)
-- [Future Improvements](#future-improvements)
-- [Contributors](#contributors)
-- [License](#license)
-
----
+A modern e-commerce platform for agricultural products in Ghana, deployed using AWS infrastructure with Terraform.
 
 ## Project Overview
 
-This project demonstrates how to design, deploy, and manage a **secure**, **scalable**, and **highly available** cloud-based web application using Amazon Web Services (AWS).
-
-The solution addresses common challenges experienced by growing businesses, including:
-
-- Slow application response times
-- Limited scalability during periods of high traffic
-- Security vulnerabilities
-- Manual deployment processes
-- Lack of infrastructure automation
-
-To address these challenges, the project leverages **Terraform** for Infrastructure as Code (IaC), **GitHub** for version control and collaboration, and multiple AWS services to deliver a modern, production-style cloud deployment following cloud security and DevOps best practices.
-
----
-
-## Project Objectives
-
-The objectives of this project are to:
-
-- Design a secure and scalable cloud architecture
-- Deploy a web application using AWS Free Tier services
-- Automate infrastructure provisioning with Terraform
-- Implement secure Identity and Access Management (IAM)
-- Improve application availability using an Application Load Balancer (ALB)
-- Deliver content globally using Amazon CloudFront
-- Store static assets in Amazon S3
-- Apply Infrastructure as Code (IaC) principles
-- Enable collaboration through GitHub
-- Document the deployment process for future maintenance and scalability
-
----
-
-## Key Features
-
-- Secure AWS cloud infrastructure
-- Infrastructure as Code using Terraform
-- High availability through Application Load Balancer
-- Global content delivery with Amazon CloudFront
-- Secure HTTPS communication using AWS Certificate Manager
-- Automated infrastructure deployment
-- Version-controlled infrastructure with GitHub
-- CI/CD workflow using GitHub Actions
-
----
-
-## Technologies Used
-
-- Amazon Web Services (AWS)
-- Terraform
-- HTML5
-- CSS3
-- JavaScript
-- Git
-- GitHub
-- GitHub Actions
-
----
-
-## Solution Architecture
-
-The application follows a modern cloud architecture designed to maximize security, availability, and scalability.
-
-```text
-                 Users
-                    │
-                    ▼
-          Amazon CloudFront
-                    │
-                    ▼
-     Application Load Balancer
-                    │
-                    ▼
-          Amazon EC2 Web Server
-                    │
-                    ▼
-      Amazon S3 (Static Assets)
-```
-
-### Architecture Diagram
-
-The following diagram illustrates the overall solution architecture and the interaction between the AWS services used throughout the project.
-
-![End-to-End Cloud Solution Architecture](docs/architecture.png)
-
-The infrastructure is provisioned using **Terraform** and managed through **GitHub**, enabling repeatable deployments, version control, and collaborative development.
-
----
-
-## AWS Services Used
-
-| AWS Service | Purpose |
-|-------------|---------|
-| **Amazon EC2** | Hosts the web application |
-| **Amazon S3** | Stores static website assets |
-| **Amazon CloudFront** | Provides a global Content Delivery Network (CDN) and HTTPS delivery |
-| **Application Load Balancer (ALB)** | Distributes incoming application traffic |
-| **AWS Certificate Manager (ACM)** | Manages SSL/TLS certificates |
-| **AWS Identity and Access Management (IAM)** | Manages user identities and permissions |
-| **Amazon VPC** | Provides network isolation |
-| **Security Groups** | Controls inbound and outbound network traffic |
-| **Terraform** | Automates infrastructure provisioning using Infrastructure as Code |
-| **GitHub Actions** | Automates Continuous Integration and Continuous Deployment (CI/CD) |
-
----
+AgroLink Ghana is a React-based e-commerce application built with TanStack Start, TypeScript, and Vite. The application is deployed on AWS using a robust cloud infrastructure managed through Infrastructure as Code (Terraform).
 
 ## Project Structure
 
-```text
-aws-end-to-end-cloud-solution/
+```
+cloud-deployment-capstone/
 
 ├── terraform/
-│   ├── main.tf
-│   ├── provider.tf
-│   ├── variables.tf
-│   ├── outputs.tf
-│   ├── networking.tf
-│   ├── ec2.tf
-│   ├── alb.tf
-│   ├── cloudfront.tf
-│   ├── s3.tf
-│   ├── acm.tf
-│   ├── iam.tf
-│   └── security_groups.tf
+│   ├── main.tf                 # Main Terraform configuration
+│   ├── provider.tf             # AWS provider configuration
+│   ├── variables.tf            # Variable definitions
+│   ├── outputs.tf              # Output values
+│   ├── terraform.tfvars        # Variable values
+│   ├── networking.tf           # VPC, subnets, and networking resources
+│   ├── ec2.tf                  # EC2 instances configuration
+│   ├── alb.tf                  # Application Load Balancer
+│   ├── cloudfront.tf           # CloudFront distribution
+│   ├── s3.tf                   # S3 buckets
+│   ├── acm.tf                  # SSL/TLS certificates
+│   ├── iam.tf                  # IAM roles and policies
+│   └── security_groups.tf      # Security group rules
 │
-├── app/
-│   ├── index.html
-│   ├── about.html
-│   ├── dashboard.html
-│   ├── contact.html
-│   ├── css/
-│   ├── js/
-│   └── images/
-│
-├── .github/
-│   └── workflows/
-│       └── terraform.yml
+├── app/                        # AgroLink Ghana application
+│   ├── src/
+│   │   ├── routes/            # Application routes
+│   │   │   ├── index.tsx      # Home page
+│   │   │   ├── products.tsx   # Products listing
+│   │   │   ├── cart.tsx       # Shopping cart
+│   │   │   ├── checkout.tsx   # Checkout process
+│   │   │   ├── about.tsx      # About page
+│   │   │   └── contact.tsx    # Contact page
+│   │   ├── components/        # React components
+│   │   ├── hooks/             # Custom React hooks
+│   │   ├── lib/               # Utility libraries
+│   │   └── assets/            # Static assets
+│   ├── public/                # Public assets
+│   ├── package.json           # Dependencies
+│   ├── vite.config.ts         # Vite configuration
+│   └── tsconfig.json          # TypeScript configuration
 │
 ├── docs/
-│   ├── architecture.png
-│   ├── screenshots/
-│   └── diagrams/
+│   ├── diagrams/              # Architecture diagrams
+│   └── screenshots/           # Application screenshots
 │
 └── README.md
 ```
 
----
+## Technology Stack
 
-## Prerequisites
+### Frontend Application
 
-Before deploying the solution, ensure the following tools and accounts are available:
+- **Framework**: React with TanStack Start
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **UI Components**: Radix UI
+- **Styling**: Tailwind CSS v4
+- **State Management**: TanStack Query
+- **Routing**: TanStack Router
 
-- AWS Free Tier Account
-- AWS CLI
-- Terraform
-- Git
-- Visual Studio Code
-- GitHub Account
-- IAM User with appropriate permissions
+### AWS Infrastructure
 
----
+- **Compute**: EC2 instances
+- **Load Balancing**: Application Load Balancer (ALB)
+- **CDN**: CloudFront
+- **Storage**: S3
+- **Networking**: VPC with public/private subnets
+- **Security**: SSL/TLS certificates via ACM, Security Groups
+- **IAM**: Role-based access control
 
-## Setup Instructions
+## Getting Started
 
-### 1. Clone the Repository
+### Prerequisites
 
-```bash
-git clone https://github.com/richardvidvidzrakou98/cloud-deployment-capstone.git
-```
+- Node.js (v18 or higher)
+- npm or bun package manager
+- AWS CLI configured with appropriate credentials
+- Terraform (v1.0 or higher)
 
-### 2. Navigate to the Project Directory
+### Local Development
 
-```bash
-cd cloud-deployment-capstone
-```
+1. **Clone the repository**
 
-### 3. Configure AWS CLI
+   ```bash
+   git clone <repository-url>
+   cd cloud-deployment-capstone
+   ```
 
-```bash
-aws configure
-```
+2. **Install application dependencies**
 
-Provide the following information when prompted:
+   ```bash
+   cd app
+   npm install
+   # or if using bun
+   bun install
+   ```
 
-- AWS Access Key ID
-- AWS Secret Access Key
-- Default AWS Region
-- Default Output Format
+3. **Run the development server**
 
-### 4. Initialize Terraform
+   ```bash
+   npm run dev
+   # or
+   bun run dev
+   ```
 
-```bash
-cd terraform
-terraform init
-```
+4. **Build for production**
+   ```bash
+   npm run build
+   # or
+   bun run build
+   ```
 
-### 5. Validate the Configuration
+### Infrastructure Deployment
 
-```bash
-terraform validate
-```
+1. **Navigate to the terraform directory**
 
-### 6. Review the Execution Plan
+   ```bash
+   cd terraform
+   ```
 
-```bash
-terraform plan
-```
+2. **Initialize Terraform**
 
-### 7. Deploy the Infrastructure
+   ```bash
+   terraform init
+   ```
 
-```bash
-terraform apply
-```
+3. **Review and update `terraform.tfvars`**
+   - Configure your AWS region
+   - Set domain names if applicable
+   - Adjust instance types and sizing
 
-When prompted, type:
+4. **Plan the deployment**
 
-```text
-yes
-```
+   ```bash
+   terraform plan
+   ```
 
-Terraform will provision all AWS resources defined in the project.
+5. **Apply the infrastructure**
 
----
+   ```bash
+   terraform apply
+   ```
 
-## Deployment Steps
+6. **Note the outputs**
+   - Application Load Balancer DNS
+   - CloudFront distribution domain
+   - S3 bucket names
 
-1. Configure AWS credentials using the AWS CLI.
-2. Initialize the Terraform working directory.
-3. Validate the Terraform configuration.
-4. Review the infrastructure execution plan.
-5. Provision the AWS infrastructure.
-6. Verify all deployed resources.
-7. Upload the web application to the deployed environment.
-8. Configure Amazon CloudFront for global content delivery.
-9. Configure HTTPS using AWS Certificate Manager.
-10. Validate application functionality and accessibility.
+## Application Features
 
----
+- **Product Catalog**: Browse agricultural products
+- **Shopping Cart**: Add products and manage quantities
+- **Checkout**: Complete purchase process
+- **Product Details**: View detailed information about products
+- **About & Contact**: Learn more about AgroLink Ghana
 
-## Security Features
+## AWS Architecture
 
-The solution incorporates several cloud security best practices, including:
+The application is deployed using a multi-tier architecture:
 
-- Principle of Least Privilege (IAM)
-- HTTPS encryption using AWS Certificate Manager
-- Secure Security Group configurations
-- Amazon VPC network isolation
-- Infrastructure as Code (Terraform)
-- Version-controlled infrastructure
-- Secure deployment workflow using GitHub
+1. **CloudFront**: CDN for global content delivery
+2. **Application Load Balancer**: Distributes traffic across EC2 instances
+3. **EC2 Instances**: Host the React application
+4. **S3**: Storage for static assets
+5. **VPC**: Isolated network environment with public and private subnets
 
----
+## Contributing
 
-## CI/CD Pipeline
-
-The project includes a GitHub Actions workflow that supports infrastructure automation and deployment.
-
-Workflow file:
-
-```text
-.github/workflows/terraform.yml
-```
-
-The workflow can be extended to support:
-
-- Terraform formatting
-- Terraform validation
-- Infrastructure planning
-- Automated deployment
-- Infrastructure testing
-
----
-
-## Screenshots
-
-Deployment screenshots will be added upon successful completion of the project.
-
-The documentation will include:
-
-- AWS Management Console
-- Amazon EC2 Instance
-- Amazon S3 Bucket
-- Application Load Balancer
-- Amazon CloudFront Distribution
-- Terraform Deployment Output
-- Running Web Application
-
----
-
-## Future Improvements
-
-Future enhancements may include:
-
-- Auto Scaling Groups
-- Amazon Route 53 custom domain integration
-- AWS Web Application Firewall (WAF)
-- Amazon CloudWatch monitoring and alerting
-- Automated backup and disaster recovery
-- Blue/Green deployment strategy
-- Multi-Region deployment
-- Cost monitoring with AWS Budgets
-
----
-
-## Contributors
-
-- Richard Vidzrakou
-- Freda Kemphrey
-- Hassanatu
-- Humaidu
-- Frank Amoako Boafo
-- Joel
-
----
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
 ## License
 
-This project was developed as part of the **AWS End-to-End Cloud Solution Deployment Capstone Project** for educational purposes.
+This project is part of a cloud deployment capstone project.
 
----
+## About AgroLink Ghana
 
-<div align="center">
-
-**Built with AWS, Terraform, GitHub, and DevOps best practices.**
-
-</div>
-
-
+AgroLink Ghana is an e-commerce platform designed to connect farmers and agricultural suppliers with customers across Ghana, making quality agricultural products accessible to everyone.

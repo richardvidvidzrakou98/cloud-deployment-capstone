@@ -1,0 +1,9 @@
+[
+  { "id": 1, "name": "Root Vegetables", "icon": "🥔" },
+  { "id": 2, "name": "Grains", "icon": "🌾" },
+  { "id": 3, "name": "Vegetables", "icon": "🥬" },
+  { "id": 4, "name": "Fruits", "icon": "🍌" },
+  { "id": 5, "name": "Legumes", "icon": "🌱" },
+  { "id": 6, "name": "Spices", "icon": "🌶️" },
+  { "id": 7, "name": "Cash Crops", "icon": "🍫" }
+]
