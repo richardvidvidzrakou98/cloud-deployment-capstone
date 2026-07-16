@@ -169,6 +169,73 @@ The application is deployed using a multi-tier architecture:
 4. **S3**: Storage for static assets
 5. **VPC**: Isolated network environment with public and private subnets
 
+## AWS Architecture
+
+The application is deployed using a secure, scalable AWS architecture:
+
+- Amazon CloudFront – Global CDN for caching and fast content delivery.
+- Application Load Balancer (ALB) – Distributes incoming traffic across EC2 instances.
+- Amazon EC2 – Hosts the AgroLink Ghana React application.
+- Amazon S3 – Stores static assets.
+- AWS Certificate Manager (ACM) – Provides SSL/TLS certificates.
+- Security Groups – Control inbound and outbound traffic.
+- IAM – Manages secure access to AWS resources.
+- VPC – Provides network isolation with public and private subnets.
+
+## CloudFront Configuration
+
+The application uses Amazon CloudFront as a Content Delivery Network (CDN) to improve performance, reduce latency, and provide secure access to the application.
+
+### Features
+
+- Global content delivery through CloudFront edge locations.
+- Improved application performance by caching static content.
+- CloudFront serves as the public entry point for user requests.
+- Requests are forwarded to the Application Load Balancer (ALB) origin.
+
+### Benefits
+
+- Faster page load times.
+- Reduced load on backend EC2 instances.
+- Improved availability and scalability.
+
+## Security Configuration
+
+The AWS infrastructure follows security best practices to protect application resources.
+
+### Security Groups
+
+- Only required inbound traffic is allowed.
+- HTTP (80) traffic is redirected to HTTPS.
+- HTTPS (443) traffic is allowed for secure communication.
+- EC2 instances receive traffic only from the Application Load Balancer.
+
+### IAM
+
+- IAM roles and policies provide least-privilege access to AWS resources.
+- Permissions are assigned based on operational requirements.
+
+### Network Security
+
+- Resources are deployed inside a Virtual Private Cloud (VPC).
+- Public and private subnets separate internet-facing and internal resources.
+
+## HTTPS Configuration
+
+Secure communication is enabled using AWS Certificate Manager (ACM).
+
+### SSL/TLS
+
+- SSL/TLS certificates are managed through AWS Certificate Manager (ACM).
+- CloudFront and the Application Load Balancer use HTTPS for encrypted communication.
+
+### Benefits
+
+- Encrypts data transmitted between users and the application.
+- Protects sensitive information during checkout and user interactions.
+- Improves user trust and follows AWS security best practices.
+
+
 ## Contributing
 
 1. Fork the repository
