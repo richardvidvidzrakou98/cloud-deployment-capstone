@@ -55,86 +55,63 @@ jobs:
           tar -czf ../agrolink-app.tar.gz .
           cd ..
 
-      - name: Deploy to EC2 Instance 1
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.EC2_HOST_1 }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: "app/agrolink-app.tar.gz"
-          target: "/tmp"
-
-      - name: Deploy to EC2 Instance 2
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.EC2_HOST_2 }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: "app/agrolink-app.tar.gz"
-          target: "/tmp"
-
-      - name: Execute deployment on EC2 Instance 1
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST_1 }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            # Create app directory if not exists
-            mkdir -p /home/${{ secrets.EC2_USER }}/agrolink
-            mkdir -p /home/${{ secrets.EC2_USER }}/agrolink/logs
-
-            # Extract deployment package
-            cd /home/${{ secrets.EC2_USER }}/agrolink
-            tar -xzf /tmp/app/agrolink-app.tar.gz
-
-            # Install production dependencies for API
-            cd api
-            npm ci --only=production
-            cd ..
-
-            # Restart PM2 processes
-            pm2 delete all || true
-            pm2 start ecosystem.config.cjs
-            pm2 save
-
-            # Cleanup
-            rm -f /tmp/app/agrolink-app.tar.gz
-
-      - name: Execute deployment on EC2 Instance 2
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST_2 }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            # Create app directory if not exists
-            mkdir -p /home/${{ secrets.EC2_USER }}/agrolink
-            mkdir -p /home/${{ secrets.EC2_USER }}/agrolink/logs
-
-            # Extract deployment package
-            cd /home/${{ secrets.EC2_USER }}/agrolink
-            tar -xzf /tmp/app/agrolink-app.tar.gz
-
-            # Install production dependencies for API
-            cd api
-            npm ci --only=production
-            cd ..
-
-            # Restart PM2 processes
-            pm2 delete all || true
-            pm2 start ecosystem.config.cjs
-            pm2 save
-
-            # Cleanup
-            rm -f /tmp/app/agrolink-app.tar.gz
-
-      - name: Invalidate CloudFront cache (Optional)
+      - name: Upload deployment package to S3
         run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
-        continue-on-error: true
+          aws s3 cp app/agrolink-app.tar.gz s3://${{ secrets.AWS_S3_BUCKET }}/deployments/agrolink-app.tar.gz
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+
+      - name: Execute deployment on EC2 Instance 1 via SSM
+        run: |
+          aws ssm send-command \
+            --instance-ids ${{ secrets.AWS_INSTANCE_ID_1 }} \
+            --document-name "AWS-RunShellScript" \
+            --parameters '{
+              "commands": [
+                "mkdir -p /home/ec2-user/agrolink",
+                "mkdir -p /home/ec2-user/agrolink/logs",
+                "aws s3 cp s3://${{ secrets.AWS_S3_BUCKET }}/deployments/agrolink-app.tar.gz /tmp/agrolink-app.tar.gz",
+                "cd /home/ec2-user/agrolink",
+                "tar -xzf /tmp/agrolink-app.tar.gz",
+                "cd api",
+                "npm ci --only=production",
+                "cd ..",
+                "pm2 delete all || true",
+                "pm2 start ecosystem.config.cjs",
+                "pm2 save",
+                "rm -f /tmp/agrolink-app.tar.gz"
+              ]
+            }' \
+            --region ${{ secrets.AWS_REGION }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+
+      - name: Execute deployment on EC2 Instance 2 via SSM
+        run: |
+          aws ssm send-command \
+            --instance-ids ${{ secrets.AWS_INSTANCE_ID_2 }} \
+            --document-name "AWS-RunShellScript" \
+            --parameters '{
+              "commands": [
+                "mkdir -p /home/ec2-user/agrolink",
+                "mkdir -p /home/ec2-user/agrolink/logs",
+                "aws s3 cp s3://${{ secrets.AWS_S3_BUCKET }}/deployments/agrolink-app.tar.gz /tmp/agrolink-app.tar.gz",
+                "cd /home/ec2-user/agrolink",
+                "tar -xzf /tmp/agrolink-app.tar.gz",
+                "cd api",
+                "npm ci --only=production",
+                "cd ..",
+                "pm2 delete all || true",
+                "pm2 start ecosystem.config.cjs",
+                "pm2 save",
+                "rm -f /tmp/agrolink-app.tar.gz"
+              ]
+            }' \
+            --region ${{ secrets.AWS_REGION }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
