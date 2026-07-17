@@ -1,0 +1,40 @@
+# Local .terraform directories (downloaded providers/modules cache)
+**/.terraform/*
+
+# Terraform lock file - opinions differ on committing this; excluded here
+# since provider versions are pinned with ~> in providers.tf. Remove this
+# line if you'd rather commit it for fully reproducible installs.
+.terraform.lock.hcl
+
+# State files - may contain secrets/sensitive data, and are unique per
+# environment. You're using an S3 backend, so these shouldn't exist
+# locally after `terraform init`, but ignore them just in case.
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude all .tfvars files, which usually contain sensitive data
+*.tfvars
+terraform/terraform.tfvars
+*.tfvars.json
+
+# Ignore override files, generally used to override resources locally
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Plan output files
+*.tfplan
+*.plan
+
+.DS_Store
+terraform/.DS_Store
