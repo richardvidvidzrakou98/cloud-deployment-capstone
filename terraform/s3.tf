@@ -28,3 +28,21 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "static" {
     }
   }
 }
+
+resource "aws_s3_bucket_policy" "static" {
+  bucket = aws_s3_bucket.static.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "AllowCloudFrontAccess"
+        Effect    = "Allow"
+        Principal = {
+          AWS = aws_cloudfront_origin_access_identity.static.iam_arn
+        }
+        Action    = "s3:GetObject"
+        Resource  = "${aws_s3_bucket.static.arn}/*"
+      }
+    ]
+  })
+}

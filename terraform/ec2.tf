@@ -1,18 +1,18 @@
 # EC2 instance configuration
 # AMI Data Source
-data "aws_ami" "amazon_linux_2" {
+data "aws_ami" "amazon_linux_2023" {
   most_recent = true
   owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    values = ["al2023-ami-2023.*-x86_64"]
   }
 }
 
 # Launch Template
 resource "aws_launch_template" "app" {
   name_prefix   = "${var.project_name}-lt-"
-  image_id      = var.ami_id != "" ? var.ami_id : data.aws_ami.amazon_linux_2.id
+  image_id      = var.ami_id != "" ? var.ami_id : data.aws_ami.amazon_linux_2023.id
   instance_type = var.instance_type
   key_name      = var.key_name
 
