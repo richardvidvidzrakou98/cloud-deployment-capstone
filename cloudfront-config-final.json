@@ -1,0 +1,154 @@
+{
+  "CallerReference": "agrolink-cloudfront-update-1760812345",
+  "Aliases": {
+    "Quantity": 2,
+    "Items": [
+      "akuafomarket.vidzrakou.com",
+      "d1pucumaqlvtom.cloudfront.net"
+    ]
+  },
+  "DefaultRootObject": "",
+  "Origins": {
+    "Quantity": 2,
+    "Items": [
+      {
+        "Id": "alb-origin",
+        "DomainName": "agrolink-ghana-alb-2076274856.us-east-1.elb.amazonaws.com",
+        "OriginPath": "",
+        "CustomHeaders": {
+          "Quantity": 0
+        },
+        "CustomOriginConfig": {
+          "HTTPPort": 80,
+          "HTTPSPort": 443,
+          "OriginProtocolPolicy": "http-only",
+          "OriginSslProtocols": {
+            "Quantity": 3,
+            "Items": ["TLSv1", "TLSv1.1", "TLSv1.2"]
+          },
+          "OriginReadTimeout": 30,
+          "OriginKeepaliveTimeout": 5
+        }
+      },
+      {
+        "Id": "s3-origin",
+        "DomainName": "azubi-hypervisor-static-bucket1.s3.amazonaws.com",
+        "OriginPath": "",
+        "S3OriginConfig": {
+          "OriginAccessIdentity": ""
+        },
+        "CustomHeaders": {
+          "Quantity": 0
+        }
+      }
+    ]
+  },
+  "OriginGroups": {
+    "Quantity": 0
+  },
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "alb-origin",
+    "TrustedSigners": {
+      "Enabled": false,
+      "Quantity": 0
+    },
+    "TrustedKeyGroups": {
+      "Enabled": false,
+      "Quantity": 0
+    },
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "AllowedMethods": {
+      "Quantity": 7,
+      "Items": ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"],
+      "CachedMethods": {
+        "Quantity": 2,
+        "Items": ["HEAD", "GET"]
+      }
+    },
+    "ForwardedValues": {
+      "QueryString": true,
+      "Cookies": {
+        "Forward": "all"
+      },
+      "Headers": {
+        "Quantity": 0
+      },
+      "QueryStringCacheKeys": {
+        "Quantity": 0
+      }
+    },
+    "MinTTL": 0,
+    "DefaultTTL": 86400,
+    "MaxTTL": 31536000,
+    "Compress": true
+  },
+  "CacheBehaviors": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "PathPattern": "/assets/*",
+        "TargetOriginId": "s3-origin",
+        "TrustedSigners": {
+          "Enabled": false,
+          "Quantity": 0
+        },
+        "TrustedKeyGroups": {
+          "Enabled": false,
+          "Quantity": 0
+        },
+        "ViewerProtocolPolicy": "https-only",
+        "AllowedMethods": {
+          "Quantity": 7,
+          "Items": ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"],
+          "CachedMethods": {
+            "Quantity": 2,
+            "Items": ["HEAD", "GET"]
+          }
+        },
+        "ForwardedValues": {
+          "QueryString": false,
+          "Cookies": {
+            "Forward": "none"
+          },
+          "Headers": {
+            "Quantity": 0
+          },
+          "QueryStringCacheKeys": {
+            "Quantity": 0
+          }
+        },
+        "MinTTL": 86400,
+        "DefaultTTL": 86400,
+        "MaxTTL": 31536000,
+        "Compress": true
+      }
+    ]
+  },
+  "CustomErrorResponses": {
+    "Quantity": 0
+  },
+  "Comment": "AgroLink Ghana CloudFront Distribution",
+  "Logging": {
+    "Enabled": false,
+    "IncludeCookies": false,
+    "Bucket": "",
+    "Prefix": ""
+  },
+  "PriceClass": "PriceClass_100",
+  "Enabled": true,
+  "ViewerCertificate": {
+    "CloudFrontDefaultCertificate": false,
+    "ACMCertificateArn": "arn:aws:acm:us-east-1:626064810996:certificate/6372fb39-78a7-4754-b2bf-de457a8f45a9",
+    "SSLSupportMethod": "sni-only",
+    "MinimumProtocolVersion": "TLSv1.2_2021"
+  },
+  "Restrictions": {
+    "GeoRestriction": {
+      "RestrictionType": "none",
+      "Quantity": 0
+    }
+  },
+  "WebACLId": "",
+  "HttpVersion": "http2",
+  "IsIPV6Enabled": true
+}
